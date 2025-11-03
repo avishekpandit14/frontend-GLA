@@ -1,59 +1,99 @@
 :root {
-      --primary: #f4f4f9;
-      --sidebar-bg: #2c3e50;
-      --accent: #1abc9c;
-      --danger: #ff6f61;
-      --text: #333;
-      --card-bg: #fff;
-    }
+  --primary: #f4f4f9;
+  --sidebar-bg: #2c3e50;
+  --accent: #1abc9c;
+  --text: #333;
+  --card-bg: #fff;
+}
 
-.section-title {
-      text-align: center;
-      margin: 2rem 0;
-      font-size: 2rem;
-      color: var(--sidebar-bg);
-    }
-
-
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--primary);
+  color: var(--text);
+}
 
 
 .content {
-      flex: 1;
-      padding: 2rem;
-      height: full;
-      overflow-y: scroll;
-    }
+  flex: 1;
+  padding: 2rem;
+  min-height: 100vh;
+  overflow-y: auto;
+}
 
-
-    .products {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      justify-content: center;
-    }
+.products {
+  display: flex;
+  justify-content: center;
+  perspective: 1000px; 
+}
 
 .card {
-      background: var(--card-bg);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-      max-width: 280px;
-      text-align: center;
-      transition: transform 1s;
-    }
+  width: 300px;
+  height: 380px;
+  perspective: 1000px;
+}
 
-.card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
 
-.card:hover {
-      transform: translateY(-8px);
-    }
+.card:hover .card-inner {
+  transform: rotateY(180deg);
+}
 
-    .card p {
-      font-size: 0.9rem;
-      padding: 0 1rem;
-      color: #666;
-    }
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  background: var(--card-bg);
+  overflow: hidden;
+}
+
+.card-front img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+
+
+.card-back {
+  background: var(--sidebar-bg);
+  color: white;
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-back h3 {
+  margin-bottom: 0.5rem;
+}
+
+.card-back p {
+  margin-bottom: 1rem;
+}
+
+.buy-btn {
+  padding: 0.6rem 1.2rem;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.buy-btn:hover {
+  background: #518a50;
+}
